@@ -1,6 +1,6 @@
 <template>
 
-  <div class="carousel slide" data-ride="carousel" @mouseenter="pause()" @mouseleave="start()">
+  <div class="carousel slide"  @mouseenter="pause()" @mouseleave="start()">
 
     <!-- 下面圆点nav -->
     <ol class="carousel-indicators" v-show="indicators">
@@ -13,13 +13,11 @@
     </div>
 
     <!-- 上下切换 -->
-    <a class="left carousel-control" href="#" role="button" @click.stop.prevent="prev" v-show="controls">
-        <span class="icon-prev" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
+    <a class="left carousel-control" href="#" @click.stop.prevent="prev" v-show="controls">
+        <span class="icon-prev"></span>
     </a>
-    <a class="right carousel-control" href="#" role="button" @click.stop.prevent="next" v-show="controls">
-        <span class="icon-next" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
+    <a class="right carousel-control" href="#" @click.stop.prevent="next" v-show="controls">
+        <span class="icon-next"></span>
     </a>
 
   </div>
@@ -62,7 +60,7 @@ export default {
   props: {
     interval: {
       type: Number,
-      default: 5000
+      default: 3000
     },
     indicators: {
       type: Boolean,
@@ -110,7 +108,6 @@ export default {
     this.items = this.$el.querySelectorAll('.carousel-item')
     this.slidesCount = this.items.length - 1
     this.slides = Array.apply(null, {length: this.items.length}).map(Number.call, Number)
-    console.log(this.items)
 
     // 第一个slide加上class
     this.items[0].classList.add('active')
@@ -135,12 +132,10 @@ export default {
 
       // 动画效果
       this._carouselAnimation = setTimeout(() => {
-        this.items[oldVal].classList.remove(this.direction.outgoing, 'active')
-        this.items[val].classList.remove(this.direction.overlay)
-        this.animating = false
+      this.items[oldVal].classList.remove(this.direction.outgoing, 'active')
+      this.items[val].classList.remove(this.direction.overlay)
+      this.animating = false
 
-        // 传播事件
-        this.$dispatch('slid::carousel', val)
       }, TRANSITION_DURATION)
     }
   },
@@ -151,3 +146,7 @@ export default {
 }
 
 </script>
+
+<style>
+  @import "./index.css";
+</style>

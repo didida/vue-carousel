@@ -3,7 +3,7 @@
     <div slot="markup">
       <!-- Html markup start-->
       <carousel
-        :interval="5000",
+        :interval="interval",
         :controls="controls"
         :indicators="indicators">
         <slide>
@@ -30,8 +30,10 @@
       carousel,
       slide
     },
+    // @prams interval为轮播时间 controls 为上下箭头 indicators 为下面nav
     data () {
       return {
+        interval: 3000,
         controls: true,
         indicators: true
       }
